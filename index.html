@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <link rel="manifest" href="manifest.json" />
     <title>HTTP検証ページ</title>
     <script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js')
-    .then(() => console.log('Service Worker registered'))
-    .catch(err => console.error('Service Worker registration failed:', err));
-}
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(() => console.log('Service Worker registered'))
+                .catch(err => console.error('Service Worker registration failed:', err));
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const m = matchMedia('(display-mode: standalone)')
+            console.log("display-mode", m)
+            document.getElementById('md').innerHTML = m.matches
+        }, false)
     </script>
 </head>
+
 <body>
     <h1>HTTP検証用ページ</h1>
     <p>このページはHTTP通信のテスト用です。</p>
+    <p id="md"></p>
 </body>
+
 </html>
